@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Mi Mamá</title>
+  <style>
+    body {
+      background: #ffe6f0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #d6336c;
+    }
+
+    .sobre {
+      width: 200px;
+      height: 120px;
+      background: #d6336c;
+      margin: 0 auto;
+      position: relative;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .sobre::before, .sobre::after {
+      content: "";
+      position: absolute;
+      border-style: solid;
+      border-width: 60px 100px 0 100px;
+      border-color: white transparent transparent transparent;
+      top: 0;
+      left: 0;
+    }
+
+    .sobre::after {
+      transform: rotate(180deg);
+      top: auto;
+      bottom: 0;
+    }
+
+    .carta {
+      display: none;
+      max-width: 600px;
+      margin: 30px auto 0;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    .corazon {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: flotar 2s linear forwards;
+    }
+
+    .corazon::before,
+    .corazon::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .corazon::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .corazon::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes flotar {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(45deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5) rotate(45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>PARA MI MAMÁ</h1>
+
+  <div class="sobre" onclick="abrirCarta()"></div>
+
+  <div class="carta" id="carta">
+    <p>Mamá querida,</p>
+    <p>Quiero que sepas cuánto te amo. Eres la luz que guía mis pasos y el abrazo que siempre me consuela. En este Día de la Madre, te deseo toda la felicidad del mundo y que Dios te bendiga siempre con salud, amor y alegría.</p>
+    <p>¡Feliz Día de la Madre!</p>
+    <p>Con todo mi amor,</p>
+    <p>❤️ Tu hijo(a)</p>
+  </div>
+
+  <script>
+    function abrirCarta() {
+      document.querySelector('.sobre').style.display = 'none';
+      document.getElementById('carta').style.display = 'block';
+    }
+
+    function crearCorazon(x, y) {
+      const corazon = document.createElement('div');
+      corazon.classList.add('corazon');
+      corazon.style.left = x + 'px';
+      corazon.style.top = y + 'px';
+      document.body.appendChild(corazon);
+      setTimeout(() => {
+        corazon.remove();
+      }, 2000);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      crearCorazon(e.clientX, e.clientY);
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      crearCorazon(touch.clientX, touch.clientY);
+    });
+  </script>
+</body>
+</html>
